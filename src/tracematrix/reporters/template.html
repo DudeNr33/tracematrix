@@ -1,0 +1,79 @@
+<html>
+
+<body>
+    <table>
+        <tr>
+            <th>Testcase/Requirement</th>
+            {% for req in requirements %}
+            <th>{{ req.id }}</th>
+            {% endfor %}
+            <th>Total</th>
+        </tr>
+        {% for tc in testcases %}
+        <tr>
+            <td>{{ tc.id }}</td>
+            {% for req in requirements %}
+                {% if req in tc.traced_to %}
+                    <td>x</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            {% endfor %}
+            <td>{{ tc.traced_to|length }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>Total</td>
+            {% for req in requirements %}
+                <td>{{ req.traced_to|length }}</td>
+            {% endfor %}
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+<style>
+    table {
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    td,
+    th {
+        border: 1px solid #999;
+        padding: 10px;
+        position: relative;
+    }
+
+    th {
+        background-color: #fff;
+    }
+
+    td:hover::before {
+        background-color: #eee;
+        content: '';
+        height: 100%;
+        left: -5000px;
+        position: absolute;
+        top: 0;
+        width: 10000px;
+        z-index: -2;
+    }
+
+    td:hover::after {
+        background-color: #ffa;
+        content: '';
+        height: 10000px;
+        left: 0;
+        position: absolute;
+        top: -5000px;
+        width: 100%;
+        z-index: -1;
+    }
+
+    body {
+        margin: 8em;
+    }
+</style>
+
+</html>

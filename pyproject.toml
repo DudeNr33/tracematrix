@@ -8,10 +8,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
+Jinja2 = "^3.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 black = {version = "^21.8b0", allow-prereleases = true}
+pylint = "^2.10.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
