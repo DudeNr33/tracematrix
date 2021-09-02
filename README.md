@@ -28,3 +28,13 @@ This will create a bidirectional link between these elements and update the ``tr
 ```python
 TraceItem.add_trace(req1, testcase1)
 ```
+
+Currently two output formats are supported - CSV and HTML.
+Default is CSV, but you can specify the reporter when creating the ``TraceabilityMatrix``:
+
+```python
+from tracematrix.reporters import HtmlReporter
+
+matrix = TraceabilityMatrix(testcases, requirements, reporter=HtmlReporter)
+matrix.create_matrix("RequirementsTraceabilityMatrix.html")
+```
