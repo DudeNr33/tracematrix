@@ -1,3 +1,6 @@
+"""
+Reporter for CSV output that can be opened with MS Excel or other tools.
+"""
 import csv
 from typing import List
 
@@ -6,6 +9,7 @@ from tracematrix.reporters.base_reporter import Reporter
 
 
 class CsvReporter(Reporter):
+    """Creates reports in .csv format"""
     @staticmethod
     def write(
         outputfile: str, testcases: List[TraceItem], requirements: List[TraceItem]
@@ -14,11 +18,11 @@ class CsvReporter(Reporter):
         with open(outputfile, "w", encoding="utf8") as outfile:
             writer = csv.DictWriter(outfile, fieldnames, delimiter=";")
             writer.writeheader()
-            for tc in testcases:
-                rowdict = {"testcase": tc.id}
-                for traced_req in tc.traced_to:
+            for testcase in testcases:
+                rowdict = {"testcase": testcase.id}
+                for traced_req in testcase.traced_to:
                     rowdict[traced_req.id] = "x"
-                rowdict["total"] = len(tc.traced_to)
+                rowdict["total"] = len(testcase.traced_to)
                 writer.writerow(rowdict)
             result_row = {"testcase": "total"}
             for req in requirements:

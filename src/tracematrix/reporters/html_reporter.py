@@ -1,13 +1,17 @@
+"""
+Reporter for HTML output.
+"""
 from typing import List
 from pathlib import Path
 
-from jinja2 import Environment, FileSystemLoader, PackageLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from tracematrix.item import TraceItem
 from tracematrix.reporters.base_reporter import Reporter
 
 
 class HtmlReporter(Reporter):
+    """Creates report in .html format"""
     env = Environment(
         loader=FileSystemLoader(Path(__file__).parent),
         autoescape=select_autoescape(["html", "xml"]),

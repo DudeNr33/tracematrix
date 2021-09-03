@@ -1,3 +1,4 @@
+"""Functional tests for creating traceability matrices"""
 from pathlib import Path
 
 import pytest

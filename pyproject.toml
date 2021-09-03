@@ -15,7 +15,21 @@ pytest = "^6.2.5"
 black = {version = "^21.8b0", allow-prereleases = true}
 pylint = "^2.10.2"
 pre-commit = "^2.15.0"
+pylint-pytest = "^1.1.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pylint.master]
+load-plugins = "pylint_pytest,pylint.extensions.mccabe"
+
+[tool.pylint.messages_control]
+enable = "useless-suppression"
+disable = "missing-module-docstring,missing-function-docstring"
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.design]
+min-public-methods = 1
