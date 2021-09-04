@@ -7,34 +7,39 @@
             <th>REQ_1</th>
             <th>REQ_2</th>
             <th>REQ_3</th>
-            <th>Total</th>
+            <th class="untraced">REQ_4</th>
+            <th class="total">Total</th>
         </tr>
         <tr>
-            <td>TC_1</td>
+            <td class="rowitem">TC_1</td>
             <td>x</td>
             <td></td>
             <td></td>
-            <td>1</td>
+            <td class="untraced"></td>
+            <td class="total">1</td>
         </tr>
         <tr>
-            <td>TC_2</td>
+            <td class="rowitem">TC_2</td>
             <td></td>
             <td>x</td>
             <td>x</td>
-            <td>2</td>
+            <td class="untraced"></td>
+            <td class="total">2</td>
         </tr>
-        <tr>
-            <td>TC_3</td>
+        <tr class="untraced">
+            <td class="rowitem">TC_3</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>0</td>
+            <td class="untraced"></td>
+            <td class="untraced">0</td>
         </tr>
-        <tr>
+        <tr class="total">
             <td>Total</td>
             <td>1</td>
             <td>1</td>
             <td>1</td>
+            <td class="untraced">0</td>
             <td></td>
         </tr>
     </table>
@@ -53,8 +58,16 @@
         position: relative;
     }
 
-    th {
-        background-color: #fff;
+    th, .rowitem {
+        background-color: rgb(172, 172, 172);
+    }
+
+    .total {
+        background-color: rgb(221, 221, 221);
+    }
+
+    .untraced {
+        background-color: rgba(193, 98, 117, 0.5);
     }
 
     td:hover::before {
@@ -69,7 +82,7 @@
     }
 
     td:hover::after {
-        background-color: #ffa;
+        background-color: rgb(216, 216, 216);
         content: '';
         height: 10000px;
         left: 0;
@@ -80,7 +93,7 @@
     }
 
     body {
-        margin: 8em;
+        margin: 1em;
     }
 </style>
 

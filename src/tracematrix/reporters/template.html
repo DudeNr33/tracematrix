@@ -5,27 +5,47 @@
         <tr>
             <th></th>
             {% for req in requirements -%}
-                <th>{{ req.id }}</th>
+                {%- if req.traced_to|length == 0 -%}
+                    <th class="untraced">{{ req.id }}</th>
+                {%- else -%}
+                    <th>{{ req.id }}</th>
+                {%- endif %}
             {% endfor -%}
-            <th>Total</th>
+            <th class="total">Total</th>
         </tr>
         {%- for tc in testcases %}
-        <tr>
-            <td>{{ tc.id }}</td>
+        {% if tc.traced_to|length == 0 -%}
+            <tr class="untraced">
+        {%- else -%}
+            <tr>
+        {%- endif %}
+            <td class="rowitem">{{ tc.id }}</td>
             {% for req in requirements %}
                 {%- if req in tc.traced_to -%}
                     <td>x</td>
                 {%- else -%}
-                    <td></td>
+                    {%- if req.traced_to|length == 0 -%}
+                        <td class="untraced"></td>
+                    {%- else -%}
+                        <td></td>
+                    {%- endif -%}
                 {%- endif %}
             {% endfor -%}
-            <td>{{ tc.traced_to|length }}</td>
+            {% if tc.traced_to|length == 0 -%}
+                <td class="untraced">{{ tc.traced_to|length }}</td>
+            {%- else -%}
+                <td class="total">{{ tc.traced_to|length }}</td>
+            {%- endif %}
         </tr>
         {%- endfor %}
-        <tr>
+        <tr class="total">
             <td>Total</td>
             {% for req in requirements -%}
-                <td>{{ req.traced_to|length }}</td>
+                {%- if req.traced_to|length == 0 -%}
+                    <td class="untraced">0</td>
+                {%- else -%}
+                    <td>{{ req.traced_to|length }}</td>
+                {%- endif %}
             {% endfor -%}
             <td></td>
         </tr>
@@ -45,8 +65,16 @@
         position: relative;
     }
 
-    th {
-        background-color: #fff;
+    th, .rowitem {
+        background-color: rgb(172, 172, 172);
+    }
+
+    .total {
+        background-color: rgb(221, 221, 221);
+    }
+
+    .untraced {
+        background-color: rgba(193, 98, 117, 0.5);
     }
 
     td:hover::before {
@@ -61,7 +89,7 @@
     }
 
     td:hover::after {
-        background-color: #ffa;
+        background-color: rgb(216, 216, 216);
         content: '';
         height: 10000px;
         left: 0;
@@ -72,7 +100,7 @@
     }
 
     body {
-        margin: 8em;
+        margin: 1em;
     }
 </style>
 

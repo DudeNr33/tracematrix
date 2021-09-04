@@ -6,11 +6,12 @@ from tracematrix.item import TraceItem
 from tracematrix.matrix import TraceabilityMatrix
 
 
-@pytest.mark.parametrize("reporter,filename",
+@pytest.mark.parametrize(
+    "reporter,filename",
     [
         (reporters.CsvReporter, "tracematrix.csv"),
-        (reporters.HtmlReporter, "tracematrix.html")
-    ]
+        (reporters.HtmlReporter, "tracematrix.html"),
+    ],
 )
 def test_matrix_creation(tmpdir, datadir, reporter, filename):
     tc1 = TraceItem("TC_1")
@@ -19,10 +20,13 @@ def test_matrix_creation(tmpdir, datadir, reporter, filename):
     req1 = TraceItem("REQ_1")
     req2 = TraceItem("REQ_2")
     req3 = TraceItem("REQ_3")
+    req4 = TraceItem("REQ_4")
     TraceItem.add_trace(tc1, req1)
     TraceItem.add_trace(tc2, req2)
     TraceItem.add_trace(tc2, req3)
-    matrix = TraceabilityMatrix((tc1, tc2, tc3), (req1, req2, req3), reporter=reporter)
+    matrix = TraceabilityMatrix(
+        (tc1, tc2, tc3), (req1, req2, req3, req4), reporter=reporter
+    )
     actual_output = tmpdir / filename
     expected_output = datadir / filename
     matrix.write_matrix(actual_output)
