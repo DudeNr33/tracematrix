@@ -4,29 +4,29 @@
     <table>
         <tr>
             <th></th>
-            {% for req in requirements %}
-            <th>{{ req.id }}</th>
-            {% endfor %}
+            {% for req in requirements -%}
+                <th>{{ req.id }}</th>
+            {% endfor -%}
             <th>Total</th>
         </tr>
-        {% for tc in testcases %}
+        {%- for tc in testcases %}
         <tr>
             <td>{{ tc.id }}</td>
             {% for req in requirements %}
-                {% if req in tc.traced_to %}
+                {%- if req in tc.traced_to -%}
                     <td>x</td>
-                {% else %}
+                {%- else -%}
                     <td></td>
-                {% endif %}
-            {% endfor %}
+                {%- endif %}
+            {% endfor -%}
             <td>{{ tc.traced_to|length }}</td>
         </tr>
-        {% endfor %}
+        {%- endfor %}
         <tr>
             <td>Total</td>
-            {% for req in requirements %}
+            {% for req in requirements -%}
                 <td>{{ req.traced_to|length }}</td>
-            {% endfor %}
+            {% endfor -%}
             <td></td>
         </tr>
     </table>

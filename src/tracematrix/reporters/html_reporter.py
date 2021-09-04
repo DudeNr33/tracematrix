@@ -15,6 +15,7 @@ class HtmlReporter(Reporter):
     env = Environment(
         loader=FileSystemLoader(Path(__file__).parent),
         autoescape=select_autoescape(["html", "xml"]),
+        keep_trailing_newline=True,
     )
     template = env.get_template("template.html")
 
