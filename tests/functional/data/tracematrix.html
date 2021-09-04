@@ -1,0 +1,129 @@
+<html>
+
+<body>
+    <table>
+        <tr>
+            <th>Testcase/Requirement</th>
+            
+            <th>REQ_1</th>
+            
+            <th>REQ_2</th>
+            
+            <th>REQ_3</th>
+            
+            <th>Total</th>
+        </tr>
+        
+        <tr>
+            <td>TC_1</td>
+            
+                
+                    <td>x</td>
+                
+            
+                
+                    <td></td>
+                
+            
+                
+                    <td></td>
+                
+            
+            <td>1</td>
+        </tr>
+        
+        <tr>
+            <td>TC_2</td>
+            
+                
+                    <td></td>
+                
+            
+                
+                    <td>x</td>
+                
+            
+                
+                    <td>x</td>
+                
+            
+            <td>2</td>
+        </tr>
+        
+        <tr>
+            <td>TC_3</td>
+            
+                
+                    <td></td>
+                
+            
+                
+                    <td></td>
+                
+            
+                
+                    <td></td>
+                
+            
+            <td>0</td>
+        </tr>
+        
+        <tr>
+            <td>Total</td>
+            
+                <td>1</td>
+            
+                <td>1</td>
+            
+                <td>1</td>
+            
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+<style>
+    table {
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    td,
+    th {
+        border: 1px solid #999;
+        padding: 10px;
+        position: relative;
+    }
+
+    th {
+        background-color: #fff;
+    }
+
+    td:hover::before {
+        background-color: #eee;
+        content: '';
+        height: 100%;
+        left: -5000px;
+        position: absolute;
+        top: 0;
+        width: 10000px;
+        z-index: -2;
+    }
+
+    td:hover::after {
+        background-color: #ffa;
+        content: '';
+        height: 10000px;
+        left: 0;
+        position: absolute;
+        top: -5000px;
+        width: 100%;
+        z-index: -1;
+    }
+
+    body {
+        margin: 8em;
+    }
+</style>
+
+</html>
