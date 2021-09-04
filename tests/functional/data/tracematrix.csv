@@ -1,4 +1,4 @@
-testcase;REQ_1;REQ_2;REQ_3;total
+;REQ_1;REQ_2;REQ_3;total
 TC_1;x;;;1
 TC_2;;x;x;2
 TC_3;;;;0
