@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tracematrix"
-version = "0.2.0"
+version = "0.3.0"
 description = "Tool to create a traceability matrix"
 authors = ["Andreas Finkler"]
 license = "MIT License"
