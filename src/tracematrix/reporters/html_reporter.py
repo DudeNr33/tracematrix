@@ -21,9 +21,9 @@ class HtmlReporter(Reporter):
 
     @classmethod
     def write(
-        cls, outputfile: str, testcases: List[TraceItem], requirements: List[TraceItem]
+        cls, outputfile: str, rows: List[TraceItem], columns: List[TraceItem]
     ) -> None:
         with open(outputfile, "w", encoding="utf8") as outfile:
             outfile.write(
-                cls.template.render(testcases=testcases, requirements=requirements)
+                cls.template.render(rows=rows, columns=columns)
             )

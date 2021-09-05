@@ -1,9 +1,11 @@
 from tracematrix import matrix, reporters
+
 from tracematrix.item import TraceItem
 
 
-class TestCreation:
+class TestMatrixCreation:
     """Unit tests concerning the initialization of a TraceabilityMatrix object."""
+
     @staticmethod
     def test_defaults():
         mymatrix = matrix.TraceabilityMatrix()

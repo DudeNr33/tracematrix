@@ -18,5 +18,9 @@ jobs:
           poetry-version: 1.1.7
       - name: Configure Poetry
         run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+      - name: Combine Readme and Changelog for PyPI
+        run: |
+          cp README.md README_ONLY.md
+          cat README_ONLY.md CHANGELOG.md > README.md
       - name: Publish package
         run: poetry publish --build
