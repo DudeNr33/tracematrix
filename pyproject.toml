@@ -5,6 +5,14 @@ description = "Tool to create a traceability matrix"
 authors = ["Andreas Finkler"]
 license = "MIT License"
 readme = "README.md"
+homepage = "https://github.com/DudeNr33/tracematrix"
+keywords = ["requirements", "traceability", "testing", "requirements engineering"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance"
+]
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
