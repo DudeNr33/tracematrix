@@ -8,33 +8,34 @@ As the APIs and export formats of different test management and/or requirement m
 ## How to use this package
 Currently it is only possible to use this package programmatically in your own script.
 
-All traceable items have a unique ``id`` and a set of other items that they are traced to.
-
-To get an existing or create a new item, you can use the class method ``get_by_id(id_)``.
-It will only create a new instance if no existing item with this ``id`` could be found.
-This means that you don't have to keep track if you already processed this item, because
-some items could appear more than once in your data (i.e. a requirement could appear on multiple test cases).
-
-```python
-from tracematrix.item import TraceItem
-
-req1 = TraceItem.get_by_id("REQ_1")
-testcase1 = TraceItem.get_by_id("TC_1")
-```
-
-Creating links between to items is done by simply passing the two items to ``TraceItem.add_trace(first, second)``.
-This will create a bidirectional link between these elements and update the ``traced_to`` attribute on both.
-
-```python
-TraceItem.add_trace(req1, testcase1)
-```
-
-Currently two output formats are supported - CSV and HTML.
-Default is CSV, but you can specify the reporter when creating the ``TraceabilityMatrix``:
-
-```python
+You start by creating an instance of ``TraceabilityMatrix``.
+The output format is controlled by the ``reporter`` parameter.
+By default ``CsvReporter`` is used, but you can also generate HTML output by passing ``HtmlReporter``.
+```Python
+from tracematrix.matrix import TraceabilityMatrix
 from tracematrix.reporters import HtmlReporter
 
-matrix = TraceabilityMatrix(testcases, requirements, reporter=HtmlReporter)
-matrix.create_matrix("RequirementsTraceabilityMatrix.html")
+matrix = TraceabilityMatrix(reporter=HtmlReporter)
+```
+
+In the next step you add rows and columns to the ``matrix``. Rows and columns can represent anything
+which may be traced against each other. Let's assume that we want to see traces between requirements and test cases.
+This is where your own logic comes into play - the way you determine which items exist and what is traced against each other is up to you and what the source of your data is. For this example, we just use some hardcoded values.
+```Python
+for testcase_id in ("TC_1", "TC_2", "TC_3"):
+    matrix.add_row(testcase_id)
+for requirement_id in ("REQ_1", "REQ_2", "REQ_3", "REQ_4"):
+    matrix.add_column(requirement_id)
+
+matrix.add_trace("TC_1", "REQ_1")
+matrix.add_trace("TC_2", "REQ_2")
+matrix.add_trace("TC_2", "REQ_3")
+```
+Note that rows and columns must be unique - you cannot have two rows or two columns with the same ``id``.
+When you add a trace between a row and a column, the ``TraceabilityMatrix`` will look up the corresponding
+``TraceItem`` instances itself.
+
+Finally, you can save the output to disk:
+```Python
+matrix.write_matrix("traceability_matrix.html)
 ```
