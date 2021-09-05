@@ -12,19 +12,19 @@ class CsvReporter(Reporter):
     """Creates reports in .csv format"""
     @staticmethod
     def write(
-        outputfile: str, testcases: List[TraceItem], requirements: List[TraceItem]
+        outputfile: str, rows: List[TraceItem], columns: List[TraceItem]
     ) -> None:
-        fieldnames = [""] + [req.id for req in requirements] + ["total"]
+        fieldnames = [""] + [req.id for req in columns] + ["total"]
         with open(outputfile, "w", encoding="utf8") as outfile:
             writer = csv.DictWriter(outfile, fieldnames, delimiter=";")
             writer.writeheader()
-            for testcase in testcases:
+            for testcase in rows:
                 rowdict = {"": testcase.id}
                 for traced_req in testcase.traced_to:
                     rowdict[traced_req.id] = "x"
                 rowdict["total"] = len(testcase.traced_to)
                 writer.writerow(rowdict)
             result_row = {"": "total"}
-            for req in requirements:
+            for req in columns:
                 result_row[req.id] = len(req.traced_to)
             writer.writerow(result_row)

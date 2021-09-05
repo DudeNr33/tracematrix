@@ -15,6 +15,6 @@ class Reporter(ABC):
     @staticmethod
     @abstractmethod
     def write(
-        outputfile: str, testcases: List[TraceItem], requirements: List[TraceItem]
+        outputfile: str, rows: List[TraceItem], columns: List[TraceItem]
     ) -> None:
         """Create the output file and save it to disk."""

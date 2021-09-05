@@ -2,7 +2,6 @@
 import pytest
 from tracematrix import reporters
 
-from tracematrix.item import TraceItem
 from tracematrix.matrix import TraceabilityMatrix
 
 
@@ -14,19 +13,14 @@ from tracematrix.matrix import TraceabilityMatrix
     ],
 )
 def test_matrix_creation(tmpdir, datadir, reporter, filename):
-    tc1 = TraceItem("TC_1")
-    tc2 = TraceItem("TC_2")
-    tc3 = TraceItem("TC_3")
-    req1 = TraceItem("REQ_1")
-    req2 = TraceItem("REQ_2")
-    req3 = TraceItem("REQ_3")
-    req4 = TraceItem("REQ_4")
-    TraceItem.add_trace(tc1, req1)
-    TraceItem.add_trace(tc2, req2)
-    TraceItem.add_trace(tc2, req3)
-    matrix = TraceabilityMatrix(
-        (tc1, tc2, tc3), (req1, req2, req3, req4), reporter=reporter
-    )
+    matrix = TraceabilityMatrix(reporter=reporter)
+    for testcase_id in ("TC_1", "TC_2", "TC_3"):
+        matrix.add_row(testcase_id)
+    for requirement_id in ("REQ_1", "REQ_2", "REQ_3", "REQ_4"):
+        matrix.add_column(requirement_id)
+    matrix.add_trace("TC_1", "REQ_1")
+    matrix.add_trace("TC_2", "REQ_2")
+    matrix.add_trace("TC_2", "REQ_3")
     actual_output = tmpdir / filename
     expected_output = datadir / filename
     matrix.write_matrix(actual_output)

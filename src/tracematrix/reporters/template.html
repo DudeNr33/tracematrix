@@ -4,47 +4,47 @@
     <table>
         <tr>
             <th></th>
-            {% for req in requirements -%}
-                {%- if req.traced_to|length == 0 -%}
-                    <th class="untraced">{{ req.id }}</th>
+            {% for column in columns -%}
+                {%- if column.traced_to|length == 0 -%}
+                    <th class="untraced">{{ column.id }}</th>
                 {%- else -%}
-                    <th>{{ req.id }}</th>
+                    <th>{{ column.id }}</th>
                 {%- endif %}
             {% endfor -%}
             <th class="total">Total</th>
         </tr>
-        {%- for tc in testcases %}
-        {% if tc.traced_to|length == 0 -%}
+        {%- for row in rows %}
+        {% if row.traced_to|length == 0 -%}
             <tr class="untraced">
         {%- else -%}
             <tr>
         {%- endif %}
-            <td class="rowitem">{{ tc.id }}</td>
-            {% for req in requirements %}
-                {%- if req in tc.traced_to -%}
+            <td class="rowitem">{{ row.id }}</td>
+            {% for column in columns %}
+                {%- if column in row.traced_to -%}
                     <td>x</td>
                 {%- else -%}
-                    {%- if req.traced_to|length == 0 -%}
+                    {%- if column.traced_to|length == 0 -%}
                         <td class="untraced"></td>
                     {%- else -%}
                         <td></td>
                     {%- endif -%}
                 {%- endif %}
             {% endfor -%}
-            {% if tc.traced_to|length == 0 -%}
-                <td class="untraced">{{ tc.traced_to|length }}</td>
+            {% if row.traced_to|length == 0 -%}
+                <td class="untraced">{{ row.traced_to|length }}</td>
             {%- else -%}
-                <td class="total">{{ tc.traced_to|length }}</td>
+                <td class="total">{{ row.traced_to|length }}</td>
             {%- endif %}
         </tr>
         {%- endfor %}
         <tr class="total">
             <td>Total</td>
-            {% for req in requirements -%}
-                {%- if req.traced_to|length == 0 -%}
+            {% for column in columns -%}
+                {%- if column.traced_to|length == 0 -%}
                     <td class="untraced">0</td>
                 {%- else -%}
-                    <td>{{ req.traced_to|length }}</td>
+                    <td>{{ column.traced_to|length }}</td>
                 {%- endif %}
             {% endfor -%}
             <td></td>
