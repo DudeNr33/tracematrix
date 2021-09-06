@@ -15,7 +15,7 @@ class CsvReporter(Reporter):
         outputfile: str, rows: List[TraceItem], columns: List[TraceItem]
     ) -> None:
         fieldnames = [""] + [req.id for req in columns] + ["total"]
-        with open(outputfile, "w", encoding="utf8") as outfile:
+        with open(outputfile, "w", encoding="utf8", newline="") as outfile:
             writer = csv.DictWriter(outfile, fieldnames, delimiter=";")
             writer.writeheader()
             for testcase in rows:
